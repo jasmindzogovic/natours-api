@@ -40,7 +40,7 @@ const getTour = (req, res) => {
 // POST new tours
 const createTour = (req, res) => {
   const newId = tours.at(-1).id + 1;
-  const newTour = Object.assign({ id: newId }, req.body);
+  const newTour = { id: newId, ...req.body };
 
   tours.push(newTour);
 
