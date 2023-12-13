@@ -1,5 +1,4 @@
 const Tour = require('../models/tourModel');
-const tourModel = require('../models/tourModel');
 
 // GET all tours
 exports.getAllTours = (req, res) => {
