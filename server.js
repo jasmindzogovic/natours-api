@@ -17,7 +17,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('DB connection was established');
+    console.log('Database connection was established');
   });
 
 // START SERVER
