@@ -35,7 +35,7 @@ const tourSchema = new mongoose.Schema(
       type: Number,
       default: 4.5,
       min: [1, 'A ratings minimum value must be 1.0'],
-      max: [1, 'A ratings maximum value must be 5.0'],
+      max: [5, 'A ratings maximum value must be 5.0'],
     },
     ratingsQuantity: {
       type: Number,
@@ -115,13 +115,13 @@ tourSchema.pre('save', function (next) {
 // Ignoring all find queries throug regex
 tourSchema.pre(/^find/, function (next) {
   this.find({ secretTour: { $ne: true } });
-  this.start = Date.now();
+  // this.start = Date.now();
   next();
 });
 
 tourSchema.post(/^find/, function (doc, next) {
-  console.log(Date.now() - this.start);
-  console.log(doc);
+  // console.log(Date.now() - this.start);
+  // console.log(doc);
   next();
 });
 
@@ -129,7 +129,7 @@ tourSchema.post(/^find/, function (doc, next) {
 
 tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-  console.log(this.pipeline());
+  // console.log(this.pipeline());
   next();
 });
 
