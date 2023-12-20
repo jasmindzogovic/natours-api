@@ -120,8 +120,6 @@ tourSchema.pre(/^find/, function (next) {
 });
 
 tourSchema.post(/^find/, function (doc, next) {
-  // console.log(Date.now() - this.start);
-  // console.log(doc);
   next();
 });
 
@@ -129,7 +127,6 @@ tourSchema.post(/^find/, function (doc, next) {
 
 tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-  // console.log(this.pipeline());
   next();
 });
 
