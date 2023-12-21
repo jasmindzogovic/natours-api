@@ -1,7 +1,7 @@
 const Tour = require('../models/tourModel');
 const APIFeatures = require('../utils/apiFeatures');
-const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
@@ -23,7 +23,6 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
-    requestedAt: req.requestTime,
     results: tours.length,
     data: {
       tours,
