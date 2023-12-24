@@ -33,6 +33,11 @@ app.all('*', (req, res, next) => {
     404,
   );
 
+  res.status(error.statusCode).json({
+    status: error.status,
+    message: error.message,
+  });
+
   next(error);
 });
 
