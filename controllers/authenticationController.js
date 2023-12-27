@@ -10,6 +10,16 @@ const sendEmail = require('../utils/email');
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 process.env.NODE_EXTRA_CA_CERTS = '/cert.pem';
 
+const cookieOptions = {
+  expiresIn: new Date(
+    Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+  ),
+  secure: true,
+  httpOnly: true,
+};
+
+if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRATION_TIME,
@@ -29,6 +39,8 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   const token = signToken(newUser._id);
+
+  res.cookie('jwt', token, cookieOptions);
 
   res.status(201).json({
     status: 'success',
@@ -55,6 +67,8 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 3) If everything is ok, send token to client
   const token = signToken(user._id);
+
+  res.cookie('jwt', token, cookieOptions);
 
   res.status(200).json({
     status: 'success',
@@ -187,6 +201,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // 4) Log the user in send JWT
   const token = signToken(user._id);
 
+  res.cookie('jwt', token, cookieOptions);
+
   res.status(200).json({
     status: 'success',
     token,
@@ -211,6 +227,8 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   // 4) Log user in, send JWT
   const token = signToken(user._id);
+
+  res.cookie('jwt', token, cookieOptions);
 
   res.status(200).json({
     status: 'success',
