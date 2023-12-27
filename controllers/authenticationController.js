@@ -7,7 +7,8 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+process.env.NODE_EXTRA_CA_CERTS = '/cert.pem';
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
