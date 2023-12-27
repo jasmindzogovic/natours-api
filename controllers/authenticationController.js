@@ -76,6 +76,7 @@ exports.protect = catchAsync(async (req, res, next) => {
       new AppError('You are not logged in. Please log in to get access', 401),
     );
   }
+
   // 2) Verification token
   // const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -182,7 +183,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 3) Update changedPasswordAt property for the user (done in model)
 
-  // 4) Log the user in/ send JWT
+  // 4) Log the user in send JWT
   const token = signToken(user._id);
 
   res.status(200).json({
