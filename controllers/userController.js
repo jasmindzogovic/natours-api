@@ -24,7 +24,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
-// CREATE new user
+// GET specific user by id
 exports.getUser = (req, res) => {
   res.status(500).json({
     status: 'error',
@@ -32,7 +32,7 @@ exports.getUser = (req, res) => {
   });
 };
 
-// GET specific user by id
+// CREATE new user
 exports.createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
