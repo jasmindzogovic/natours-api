@@ -5,6 +5,14 @@ const {
   createReview,
 } = require('../controllers/reviewController');
 
-router.route('/').get(getAllReviews).post(createReview);
+const {
+  restrictTo,
+  protect,
+} = require('../controllers/authenticationController');
+
+router
+  .route('/')
+  .get(getAllReviews)
+  .post(protect, restrictTo('user'), createReview);
 
 module.exports = router;
