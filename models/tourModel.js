@@ -121,6 +121,12 @@ tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
 
+tourSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'tour',
+  localField: '_id',
+});
+
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
@@ -134,22 +140,10 @@ tourSchema.pre('save', function (next) {
 //   next();
 // });
 
-// tourSchema.pre('save', function (next) {
-//   console.log('Will save document...');
-//   next();
-// });
-
-// // eslint-disable-next-line prettier/prettier, prefer-arrow-callback
-// tourSchema.post('save', function (doc, next) {
-//   console.log(doc);
-//   next();
-// });
-
 // QUERY MIDDLEWARE
 // Ignoring all find queries throug regex
 tourSchema.pre(/^find/, function (next) {
   this.find({ secretTour: { $ne: true } });
-  // this.start = Date.now();
   next();
 });
 
@@ -158,10 +152,6 @@ tourSchema.pre(/^find/, function (next) {
     path: 'guides',
     select: '-__v -passwordChangedAt',
   });
-  next();
-});
-
-tourSchema.post(/^find/, function (doc, next) {
   next();
 });
 
