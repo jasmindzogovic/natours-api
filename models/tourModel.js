@@ -117,6 +117,7 @@ const tourSchema = new mongoose.Schema(
   },
 );
 
+// VIRTUAL PROPERTIES
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
@@ -141,7 +142,7 @@ tourSchema.pre('save', function (next) {
 // });
 
 // QUERY MIDDLEWARE
-// Ignoring all find queries throug regex
+// Running find queries through regex
 tourSchema.pre(/^find/, function (next) {
   this.find({ secretTour: { $ne: true } });
   next();
