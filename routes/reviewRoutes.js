@@ -14,11 +14,17 @@ const {
   protect,
 } = require('../controllers/authenticationController');
 
+router.use(protect);
+
 router
   .route('/')
   .get(getAllReviews)
-  .post(protect, restrictTo('user'), setTourUserIds, createReview);
+  .post(restrictTo('user'), setTourUserIds, createReview);
 
-router.route('/:id').patch(updateReview).delete(deleteReview).get(getReview);
+router
+  .route('/:id')
+  .patch(restrictTo('user', 'admin'), updateReview)
+  .delete(restrictTo('user', 'admin'), deleteReview)
+  .get(getReview);
 
 module.exports = router;
