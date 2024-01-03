@@ -1,6 +1,6 @@
 const User = require('../models/userModel');
 
-const { deleteOne, updateOne, createOne } = require('./handlerFactory');
+const { deleteOne, updateOne, getOne, getAll } = require('./handlerFactory');
 
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
@@ -14,29 +14,18 @@ const filterObject = (object, ...fields) => {
 };
 
 // GET all users
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
-
-  // SEND RESPONSE
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
+exports.getAllUsers = getAll(User);
 
 // GET specific user by id
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined',
-  });
-};
+exports.getUser = getOne(User);
 
 // CREATE new user
-exports.createUser = createOne(User);
+exports.createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not defined! Please use /signup instead',
+  });
+};
 
 // UPDATE specific user by id
 exports.updateUser = updateOne(User);
