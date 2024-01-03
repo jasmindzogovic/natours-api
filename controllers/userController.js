@@ -1,6 +1,6 @@
 const User = require('../models/userModel');
 
-const { deleteOne } = require('./handlerFactory');
+const { deleteOne, updateOne, createOne } = require('./handlerFactory');
 
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
@@ -36,20 +36,10 @@ exports.getUser = (req, res) => {
 };
 
 // CREATE new user
-exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined',
-  });
-};
+exports.createUser = createOne(User);
 
 // UPDATE specific user by id
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined',
-  });
-};
+exports.updateUser = updateOne(User);
 
 // DELETE specific user by id
 exports.deleteUser = deleteOne(User);
