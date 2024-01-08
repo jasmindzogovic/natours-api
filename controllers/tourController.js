@@ -1,5 +1,4 @@
 const Tour = require('../models/tourModel');
-const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
@@ -148,7 +147,7 @@ exports.getDistances = catchAsync(async (req, res, next) => {
       $geoNear: {
         near: {
           type: 'Point',
-          coordinates: [lng * 1, lat * 1],
+          coordinates: [+lng, +lat],
         },
         distanceField: 'distance',
         distanceMultiplier: multiplier,
