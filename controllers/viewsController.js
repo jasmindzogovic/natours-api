@@ -17,8 +17,9 @@ exports.getTour = catchAsync(async (req, res) => {
     path: 'reviews',
     fields: 'review rating user',
   });
-  // const tour = await Tour.find({slug: })
+
   res.status(200).render('tour', {
+    title: `${tour.name}`,
     tour,
   });
 });
