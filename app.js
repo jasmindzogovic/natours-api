@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 // SET SECURITY HTTP HEADERS
 app.use(helmet());
 
-// LIMIT REQUESTS FROM SAME API
+// LIMIT REQUESTS FROM SAME IP
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,

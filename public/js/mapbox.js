@@ -8,7 +8,6 @@ mapboxgl.accessToken =
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/jasmindzogovic/clr6umruu012101qubdi85gon',
-  zoom: 3,
   scrollZoom: false,
 });
 
