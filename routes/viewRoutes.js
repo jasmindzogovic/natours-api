@@ -6,9 +6,11 @@ const {
   login,
 } = require('../controllers/viewsController');
 
+const { protect } = require('../controllers/authenticationController');
+
 router.get('/', getOverview);
 
-router.get('/tour/:slug', getTour);
+router.get('/tour/:slug', protect, getTour);
 
 router.get('/login', login);
 

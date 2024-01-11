@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 const Tour = require('../models/tourModel');
 const catchAsync = require('../utils/catchAsync');
 
@@ -33,7 +31,10 @@ exports.getTour = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res) => {
-  res.status(200).render('login', {
-    title: 'Log into your account',
-  });
+  res
+    .status(200)
+    .set('Content-Security-Policy', 'script-src-attr self')
+    .render('login', {
+      title: 'Log into your account',
+    });
 });
