@@ -6,12 +6,12 @@ const {
   login,
 } = require('../controllers/viewsController');
 
-const { protect } = require('../controllers/authenticationController');
+const { isLoggedIn } = require('../controllers/authenticationController');
+
+router.use(isLoggedIn);
 
 router.get('/', getOverview);
-
-router.get('/tour/:slug', protect, getTour);
-
+router.get('/tour/:slug', getTour);
 router.get('/login', login);
 
 module.exports = router;
