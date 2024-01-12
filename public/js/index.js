@@ -1,14 +1,16 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
 
-import { login } from './login'
-import { displayMap } from './mapbox'
+import { login } from './login';
+import { logout } from './logout';
+import { displayMap } from './mapbox';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
-const loginForm = document.querySelector('form');
+const loginForm = document.querySelector('.form');
+const logoutBtn = document.querySelector('.nav__el--logout');
 
-// DELEGATION 
+// DELEGATION
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
   displayMap(locations);
@@ -22,3 +24,5 @@ if (loginForm) {
     login(email, password);
   });
 }
+
+if (logoutBtn) logoutBtn.addEventListener('click', logout);
