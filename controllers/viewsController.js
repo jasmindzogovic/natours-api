@@ -20,10 +20,10 @@ exports.getTour = catchAsync(async (req, res, next) => {
 
   res
     .status(200)
-    // .set(
-    //   'Content-Security-Policy',
-    //   'connect-src https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com',
-    // )
+    .set(
+      'Content-Security-Policy',
+      'connect-src https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com',
+    )
     .render('tour', {
       title: `${tour.name}`,
       tour,
@@ -33,7 +33,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res) => {
   res
     .status(200)
-    // .set('Content-Security-Policy', 'script-src-attr self')
+    .set('Content-Security-Policy', 'script-src-attr self')
     .render('login', {
       title: 'Log into your account',
     });
