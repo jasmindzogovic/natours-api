@@ -664,7 +664,7 @@ var _logout = require("./logout");
 var _mapbox = require("./mapbox");
 // DOM ELEMENTS
 const mapBox = document.getElementById("map");
-const loginForm = document.querySelector(".form");
+const loginForm = document.querySelector(".form--login");
 const logoutBtn = document.querySelector(".nav__el--logout");
 // DELEGATION
 if (mapBox) {

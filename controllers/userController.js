@@ -62,10 +62,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   if (!updatedUser) return next(new AppError('That user does not exist', 400));
 
-  // user.name = req.body.name;
-  // user.email = req.body.email;
-  // await user.save({ validateBeforeSave: false });
-
   res.status(200).json({
     status: 'success',
     message: 'Successfully changed name and email',
