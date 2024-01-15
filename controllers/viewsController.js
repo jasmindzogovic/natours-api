@@ -74,3 +74,9 @@ exports.updateSettings = catchAsync(async (req, res) => {
     user: req.user,
   });
 });
+
+exports.signup = catchAsync(async (req, res, next) => {
+  res.status(200).render('signup', {
+    title: 'Sign up for an account',
+  });
+});

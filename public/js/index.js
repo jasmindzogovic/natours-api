@@ -2,6 +2,7 @@ import 'core-js';
 import 'regenerator-runtime/runtime';
 
 import { login } from './login';
+import { signup } from './singup';
 import { logout } from './logout';
 import { displayMap } from './mapbox';
 import { updateData, updatePassword } from './updateSettings';
@@ -12,6 +13,7 @@ const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const formUserData = document.querySelector('.form-user-data');
 const formUserPassword = document.querySelector('.form-user-password');
+const signupForm = document.querySelector('.signup-form');
 
 // DELEGATION
 if (mapBox) {
@@ -50,6 +52,19 @@ if (formUserPassword) {
     const passwordConfirm = document.getElementById('password-confirm').value;
 
     updatePassword(passwordCurrent, password, passwordConfirm);
+  });
+}
+
+if (signupForm) {
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+
+    signup(name, email, password, passwordConfirm);
   });
 }
 

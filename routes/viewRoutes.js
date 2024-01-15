@@ -6,6 +6,7 @@ const {
   login,
   getAccount,
   updateUserData,
+  signup,
 } = require('../controllers/viewsController');
 
 const {
@@ -13,6 +14,7 @@ const {
   protect,
 } = require('../controllers/authenticationController');
 
+router.get('/signup', signup);
 router.get('/', isLoggedIn, getOverview);
 router.get('/tour/:slug', isLoggedIn, getTour);
 router.get('/login', isLoggedIn, login);
