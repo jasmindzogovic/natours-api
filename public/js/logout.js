@@ -7,7 +7,7 @@ export const logout = async () => {
     const res = await axios.get('http://127.0.0.1:8000/api/v1/users/logout');
 
     if (res.data.status === 'success') {
-      location.reload(true);
+      location.assign('/');
       showAlert('success', 'Successfully logged out.');
     }
   } catch (error) {
