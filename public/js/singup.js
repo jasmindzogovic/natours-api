@@ -2,14 +2,12 @@ import axios from 'axios';
 
 import { showAlert } from './alert';
 
-export const signup = async (name, email, password, passwordConfirm) => {
+export const signup = async (data) => {
   try {
-    const res = await axios.post('http://127.0.0.1:8000/api/v1/users/signup', {
-      name,
-      email,
-      password,
-      passwordConfirm,
-    });
+    const res = await axios.post(
+      'http://127.0.0.1:8000/api/v1/users/signup',
+      data,
+    );
 
     if (res.data.status === 'success') {
       showAlert('success', 'Signed up successfully!');

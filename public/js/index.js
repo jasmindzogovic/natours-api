@@ -5,7 +5,7 @@ import { login } from './login';
 import { signup } from './singup';
 import { logout } from './logout';
 import { displayMap } from './mapbox';
-import { updatePassword, updateSettings } from './updateSettings';
+import { updateSettings } from './updateSettings';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -52,7 +52,6 @@ if (formUserPassword) {
     const passwordCurrent = document.getElementById('password-current').value;
     const passwordConfirm = document.getElementById('password-confirm').value;
 
-    // updatePassword(passwordCurrent, password, passwordConfirm);
     updateSettings({ passwordCurrent, password, passwordConfirm }, 'password');
   });
 }
@@ -66,7 +65,7 @@ if (signupForm) {
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('password-confirm').value;
 
-    signup(name, email, password, passwordConfirm);
+    signup({ name, email, password, passwordConfirm });
   });
 }
 

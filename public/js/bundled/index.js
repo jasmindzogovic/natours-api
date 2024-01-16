@@ -695,7 +695,6 @@ if (formUserPassword) formUserPassword.addEventListener("submit", (e)=>{
     const password = document.getElementById("password").value;
     const passwordCurrent = document.getElementById("password-current").value;
     const passwordConfirm = document.getElementById("password-confirm").value;
-    // updatePassword(passwordCurrent, password, passwordConfirm);
     (0, _updateSettings.updateSettings)({
         passwordCurrent,
         password,
@@ -708,7 +707,12 @@ if (signupForm) signupForm.addEventListener("submit", (e)=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const passwordConfirm = document.getElementById("password-confirm").value;
-    (0, _singup.signup)(name, email, password, passwordConfirm);
+    (0, _singup.signup)({
+        name,
+        email,
+        password,
+        passwordConfirm
+    });
 });
 if (logoutBtn) logoutBtn.addEventListener("click", (0, _logout.logout));
 
@@ -11598,14 +11602,9 @@ parcelHelpers.export(exports, "signup", ()=>signup);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("./alert");
-const signup = async (name, email, password, passwordConfirm)=>{
+const signup = async (data)=>{
     try {
-        const res = await (0, _axiosDefault.default).post("http://127.0.0.1:8000/api/v1/users/signup", {
-            name,
-            email,
-            password,
-            passwordConfirm
-        });
+        const res = await (0, _axiosDefault.default).post("http://127.0.0.1:8000/api/v1/users/signup", data);
         if (res.data.status === "success") {
             (0, _alert.showAlert)("success", "Signed up successfully!");
             window.setTimeout(()=>{
