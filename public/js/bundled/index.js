@@ -684,16 +684,23 @@ if (loginForm) loginForm.addEventListener("submit", (e)=>{
 });
 if (formUserData) formUserData.addEventListener("submit", (e)=>{
     e.preventDefault();
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    (0, _updateSettings.updateData)(name, email);
+    const form = new FormData();
+    form.append("name", document.getElementById("name").value);
+    form.append("email", document.getElementById("email").value);
+    form.append("photo", document.getElementById("photo").files[0]);
+    (0, _updateSettings.updateSettings)(form, "data");
 });
 if (formUserPassword) formUserPassword.addEventListener("submit", (e)=>{
     e.preventDefault();
     const password = document.getElementById("password").value;
     const passwordCurrent = document.getElementById("password-current").value;
     const passwordConfirm = document.getElementById("password-confirm").value;
-    (0, _updateSettings.updatePassword)(passwordCurrent, password, passwordConfirm);
+    // updatePassword(passwordCurrent, password, passwordConfirm);
+    (0, _updateSettings.updateSettings)({
+        passwordCurrent,
+        password,
+        passwordConfirm
+    }, "password");
 });
 if (signupForm) signupForm.addEventListener("submit", (e)=>{
     e.preventDefault();
@@ -11613,36 +11620,16 @@ const signup = async (name, email, password, passwordConfirm)=>{
 },{"axios":"5vw73","./alert":"8F2M5","@parcel/transformer-js/src/esmodule-helpers.js":"fofuL"}],"j7xLx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "updateData", ()=>updateData);
-parcelHelpers.export(exports, "updatePassword", ()=>updatePassword);
+parcelHelpers.export(exports, "updateSettings", ()=>updateSettings);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("./alert");
-const updateData = async (name, email)=>{
+const updateSettings = async (data, type)=>{
     try {
-        const res = await (0, _axiosDefault.default).patch("http://127.0.0.1:8000/api/v1/users/updateMe", {
-            name,
-            email
-        });
+        const url = type === "password" ? "http://127.0.0.1:8000/api/v1/users/updateMyPassword" : "http://127.0.0.1:8000/api/v1/users/updateMe";
+        const res = await (0, _axiosDefault.default).patch(url, data);
         if (res.data.status === "success") {
-            (0, _alert.showAlert)("success", "Changed data successfully!");
-            window.setTimeout(()=>{
-                location.reload();
-            }, 1500);
-        }
-    } catch (error) {
-        (0, _alert.showAlert)("error", error.response.data.message);
-    }
-};
-const updatePassword = async (passwordCurrent, password, passwordConfirm)=>{
-    try {
-        const res = await (0, _axiosDefault.default).patch("http://127.0.0.1:8000/api/v1/users/updateMyPassword", {
-            passwordCurrent,
-            password,
-            passwordConfirm
-        });
-        if (res.data.status === "success") {
-            (0, _alert.showAlert)("success", "Changed password successfully!");
+            (0, _alert.showAlert)("success", `Changed ${type} successfully!`);
             window.setTimeout(()=>{
                 location.reload();
             }, 1500);

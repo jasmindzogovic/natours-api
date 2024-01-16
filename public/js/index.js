@@ -5,7 +5,7 @@ import { login } from './login';
 import { signup } from './singup';
 import { logout } from './logout';
 import { displayMap } from './mapbox';
-import { updateData, updatePassword } from './updateSettings';
+import { updatePassword, updateSettings } from './updateSettings';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -35,11 +35,12 @@ if (loginForm) {
 if (formUserData) {
   formUserData.addEventListener('submit', (e) => {
     e.preventDefault();
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-
-    updateData(name, email);
+    updateSettings(form, 'data');
   });
 }
 
@@ -51,7 +52,8 @@ if (formUserPassword) {
     const passwordCurrent = document.getElementById('password-current').value;
     const passwordConfirm = document.getElementById('password-confirm').value;
 
-    updatePassword(passwordCurrent, password, passwordConfirm);
+    // updatePassword(passwordCurrent, password, passwordConfirm);
+    updateSettings({ passwordCurrent, password, passwordConfirm }, 'password');
   });
 }
 
