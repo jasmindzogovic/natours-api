@@ -39,13 +39,12 @@ exports.getMe = (req, res, next) => {
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
+  console.log(req.file);
+  console.log(req.body);
+
   // 1) Create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
     return next(new AppError('This route is not for password updates', 400));
-  }
-
-  if (!req.body.name || !req.body.email) {
-    return next(new AppError('You need to input your name and email', 400));
   }
 
   // 2) Update user document
@@ -64,7 +63,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    message: 'Successfully changed name and email',
     data: {
       user: updatedUser,
     },

@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const multer = require('multer');
+
+const upload = multer({ dest: 'public/img/users' });
 
 const {
   getAllUsers,
@@ -34,7 +37,7 @@ router.use(protect);
 router.patch('/updateMyPassword', updatePassword);
 
 router.get('/me', getMe, getUser);
-router.patch('/updateMe', updateMe);
+router.patch('/updateMe', upload.single('photo'), updateMe);
 router.delete('/deleteMe', deleteMe);
 
 router.use(restrictTo('admin'));
