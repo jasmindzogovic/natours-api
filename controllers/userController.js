@@ -88,8 +88,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     return next(new AppError('This route is not for password updates', 400));
   }
 
-  console.log(req.body);
-
   // 2) Update user document
   const filteredInput = filterObject(req.body, 'name', 'email');
 
