@@ -1,4 +1,5 @@
 const multer = require('multer');
+const sharp = require('sharp');
 
 const Tour = require('../models/tourModel');
 const AppError = require('../utils/appError');
@@ -39,10 +40,37 @@ exports.uploadTourImages = upload.fields([
   { name: 'images', maxCount: 3 },
 ]);
 
-exports.resizeTourImages = (req, res, next) => {
-  console.log(req.files);
+exports.resizeTourImages = catchAsync(async (req, res, next) => {
+  if (!req.files || req.files.length < 2) return next();
+
+  // 1) Cover image
+  req.body.imageCover = `tour-${req.params.id}-${Date.now()}-cover.jpeg`;
+
+  await sharp(req.files.imageCover.at(0).buffer)
+    .resize(2000, 1333)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/tours/${req.body.imageCover}`);
+
+  // 2) Images
+  req.body.images = [];
+
+  await Promise.all(
+    req.files.images.map(async (file, i) => {
+      const filename = `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
+
+      await sharp(file.buffer)
+        .resize(2000, 1333)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(`public/img/tours/${filename}`);
+
+      req.body.images.push(filename);
+    }),
+  );
+
   next();
-};
+});
 
 // GET all tours
 exports.getAllTours = getAll(Tour);
@@ -54,7 +82,7 @@ exports.getTour = getOne(Tour, { path: 'reviews' });
 exports.createTour = createOne(Tour);
 
 // PATCH tour
-exports.updateTour = updateOne;
+exports.updateTour = updateOne(Tour);
 
 // DELETE tour
 exports.deleteTour = deleteOne(Tour);
