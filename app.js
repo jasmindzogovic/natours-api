@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const errorController = require('./controllers/errorController');
@@ -33,7 +34,53 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // SET SECURITY HTTP HEADERS
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+  }),
+);
+
+// Further HELMET configuration for Security Policy (CSP)
+const scriptSrcUrls = [
+  'https://api.tiles.mapbox.com/',
+  'https://api.mapbox.com/',
+  'https://*.cloudflare.com',
+  'https://js.stripe.com/v3/',
+  'https://checkout.stripe.com',
+];
+const styleSrcUrls = [
+  'https://api.mapbox.com/',
+  'https://api.tiles.mapbox.com/',
+  'https://fonts.googleapis.com/',
+  'https://www.myfonts.com/fonts/radomir-tinkov/gilroy/*',
+  'checkout.stripe.com',
+];
+const connectSrcUrls = [
+  'ws://127.0.0.1:1234/',
+  'https://*.mapbox.com/',
+  'https://*.cloudflare.com',
+  'http://127.0.0.1:8000',
+  'http://127.0.0.1:52191',
+  '*.stripe.com',
+];
+
+const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", 'blob:'],
+      objectSrc: [],
+      imgSrc: ["'self'", 'blob:', 'data:'],
+      fontSrc: ["'self'", ...fontSrcUrls],
+      frameSrc: ['*.stripe.com', '*.stripe.network'],
+    },
+  }),
+);
 
 // LIMIT REQUESTS FROM SAME IP
 const limiter = rateLimit({

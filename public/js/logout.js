@@ -11,6 +11,7 @@ export const logout = async () => {
       showAlert('success', 'Successfully logged out.');
     }
   } catch (error) {
+    console.log(error);
     showAlert('error', 'Error logging out. Try again.');
   }
 };

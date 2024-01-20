@@ -25,25 +25,16 @@ exports.getTour = catchAsync(async (req, res, next) => {
     return next(new AppError('There is no tour with that name.', 404));
   }
 
-  res
-    .status(200)
-    .set(
-      'Content-Security-Policy',
-      'connect-src https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com',
-    )
-    .render('tour', {
-      title: `${tour.name}`,
-      tour,
-    });
+  res.status(200).render('tour', {
+    title: `${tour.name}`,
+    tour,
+  });
 });
 
 exports.login = catchAsync(async (req, res) => {
-  res
-    .status(200)
-    .set('Content-Security-Policy', 'script-src-attr self')
-    .render('login', {
-      title: 'Log into your account',
-    });
+  res.status(200).render('login', {
+    title: 'Log into your account',
+  });
 });
 
 exports.getAccount = catchAsync(async (req, res) => {

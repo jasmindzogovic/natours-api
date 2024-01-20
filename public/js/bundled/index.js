@@ -664,6 +664,7 @@ var _singup = require("./singup");
 var _logout = require("./logout");
 var _mapbox = require("./mapbox");
 var _updateSettings = require("./updateSettings");
+var _stripe = require("./stripe");
 // DOM ELEMENTS
 const mapBox = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
@@ -671,6 +672,7 @@ const logoutBtn = document.querySelector(".nav__el--logout");
 const formUserData = document.querySelector(".form-user-data");
 const formUserPassword = document.querySelector(".form-user-password");
 const signupForm = document.querySelector(".signup-form");
+const bookBtn = document.getElementById("book-tour");
 // DELEGATION
 if (mapBox) {
     const locations = JSON.parse(mapBox.dataset.locations);
@@ -715,8 +717,12 @@ if (signupForm) signupForm.addEventListener("submit", (e)=>{
     });
 });
 if (logoutBtn) logoutBtn.addEventListener("click", (0, _logout.logout));
+if (bookBtn) bookBtn.addEventListener("click", (e)=>{
+    const { tourId } = e.target.dataset;
+    (0, _stripe.bookTour)(tourId);
+});
 
-},{"core-js/modules/es.regexp.flags.js":"azdjA","core-js/modules/es.typed-array.set.js":"b0iRR","core-js/modules/esnext.array.last-index.js":"lKgmp","core-js/modules/esnext.array.last-item.js":"dV2pf","core-js/modules/esnext.composite-key.js":"dab6g","core-js/modules/esnext.composite-symbol.js":"3AZ6J","core-js/modules/esnext.map.delete-all.js":"8TwF2","core-js/modules/esnext.map.every.js":"lSs2V","core-js/modules/esnext.map.filter.js":"lFMsN","core-js/modules/esnext.map.find.js":"hXIhH","core-js/modules/esnext.map.find-key.js":"k5O0V","core-js/modules/esnext.map.from.js":"cmpay","core-js/modules/esnext.map.group-by.js":"1DEv1","core-js/modules/esnext.map.includes.js":"bNX6F","core-js/modules/esnext.map.key-by.js":"3AFbl","core-js/modules/esnext.map.key-of.js":"3I1Ix","core-js/modules/esnext.map.map-keys.js":"13n8d","core-js/modules/esnext.map.map-values.js":"3otuN","core-js/modules/esnext.map.merge.js":"50d90","core-js/modules/esnext.map.of.js":"93c3R","core-js/modules/esnext.map.reduce.js":"cXdHi","core-js/modules/esnext.map.some.js":"fnejw","core-js/modules/esnext.map.update.js":"cSr5E","core-js/modules/esnext.math.clamp.js":"lWaid","core-js/modules/esnext.math.deg-per-rad.js":"dIhSF","core-js/modules/esnext.math.degrees.js":"1e8Ri","core-js/modules/esnext.math.fscale.js":"5Y31R","core-js/modules/esnext.math.iaddh.js":"57lww","core-js/modules/esnext.math.imulh.js":"d2fr9","core-js/modules/esnext.math.isubh.js":"57oBp","core-js/modules/esnext.math.rad-per-deg.js":"3dM5T","core-js/modules/esnext.math.radians.js":"foEKl","core-js/modules/esnext.math.scale.js":"iXpEb","core-js/modules/esnext.math.seeded-prng.js":"dp9ts","core-js/modules/esnext.math.signbit.js":"2rwj5","core-js/modules/esnext.math.umulh.js":"fy8Bl","core-js/modules/esnext.number.from-string.js":"6w8r6","core-js/modules/esnext.observable.js":"6yFTU","core-js/modules/esnext.promise.try.js":"kQOdw","core-js/modules/esnext.reflect.define-metadata.js":"lBsjI","core-js/modules/esnext.reflect.delete-metadata.js":"idSZa","core-js/modules/esnext.reflect.get-metadata.js":"dQvP0","core-js/modules/esnext.reflect.get-metadata-keys.js":"4UfAw","core-js/modules/esnext.reflect.get-own-metadata.js":"8BKE4","core-js/modules/esnext.reflect.get-own-metadata-keys.js":"lqSwZ","core-js/modules/esnext.reflect.has-metadata.js":"67E18","core-js/modules/esnext.reflect.has-own-metadata.js":"b7qbH","core-js/modules/esnext.reflect.metadata.js":"ktR6v","core-js/modules/esnext.set.add-all.js":"7c36X","core-js/modules/esnext.set.delete-all.js":"lHdKi","core-js/modules/esnext.set.difference.js":"dP1AE","core-js/modules/esnext.set.every.js":"4tV4O","core-js/modules/esnext.set.filter.js":"hlpTz","core-js/modules/esnext.set.find.js":"aiiEV","core-js/modules/esnext.set.from.js":"2k7Jy","core-js/modules/esnext.set.intersection.js":"ijIjZ","core-js/modules/esnext.set.is-disjoint-from.js":"g1iZh","core-js/modules/esnext.set.is-subset-of.js":"fdw7E","core-js/modules/esnext.set.is-superset-of.js":"6R5mc","core-js/modules/esnext.set.join.js":"54bgm","core-js/modules/esnext.set.map.js":"i0nak","core-js/modules/esnext.set.of.js":"5RZfl","core-js/modules/esnext.set.reduce.js":"7kIwX","core-js/modules/esnext.set.some.js":"cRvBY","core-js/modules/esnext.set.symmetric-difference.js":"1RJII","core-js/modules/esnext.set.union.js":"ghwDx","core-js/modules/esnext.string.at.js":"ewff9","core-js/modules/esnext.string.code-points.js":"jA1PA","core-js/modules/esnext.symbol.dispose.js":"cZD4y","core-js/modules/esnext.symbol.observable.js":"3I5TV","core-js/modules/esnext.symbol.pattern-match.js":"2AEY2","core-js/modules/esnext.weak-map.delete-all.js":"4Z5pz","core-js/modules/esnext.weak-map.from.js":"bQVbE","core-js/modules/esnext.weak-map.of.js":"fanFv","core-js/modules/esnext.weak-set.add-all.js":"2scYe","core-js/modules/esnext.weak-set.delete-all.js":"iiNtz","core-js/modules/esnext.weak-set.from.js":"8fn81","core-js/modules/esnext.weak-set.of.js":"9aBZU","core-js/modules/web.immediate.js":"3pRoj","regenerator-runtime/runtime":"cDAES","./login":"aUJqG","./mapbox":"boTQ2","./logout":"8o2Xz","./singup":"k1hsN","./updateSettings":"j7xLx"}],"azdjA":[function(require,module,exports) {
+},{"core-js/modules/es.regexp.flags.js":"azdjA","core-js/modules/es.typed-array.set.js":"b0iRR","core-js/modules/esnext.array.last-index.js":"lKgmp","core-js/modules/esnext.array.last-item.js":"dV2pf","core-js/modules/esnext.composite-key.js":"dab6g","core-js/modules/esnext.composite-symbol.js":"3AZ6J","core-js/modules/esnext.map.delete-all.js":"8TwF2","core-js/modules/esnext.map.every.js":"lSs2V","core-js/modules/esnext.map.filter.js":"lFMsN","core-js/modules/esnext.map.find.js":"hXIhH","core-js/modules/esnext.map.find-key.js":"k5O0V","core-js/modules/esnext.map.from.js":"cmpay","core-js/modules/esnext.map.group-by.js":"1DEv1","core-js/modules/esnext.map.includes.js":"bNX6F","core-js/modules/esnext.map.key-by.js":"3AFbl","core-js/modules/esnext.map.key-of.js":"3I1Ix","core-js/modules/esnext.map.map-keys.js":"13n8d","core-js/modules/esnext.map.map-values.js":"3otuN","core-js/modules/esnext.map.merge.js":"50d90","core-js/modules/esnext.map.of.js":"93c3R","core-js/modules/esnext.map.reduce.js":"cXdHi","core-js/modules/esnext.map.some.js":"fnejw","core-js/modules/esnext.map.update.js":"cSr5E","core-js/modules/esnext.math.clamp.js":"lWaid","core-js/modules/esnext.math.deg-per-rad.js":"dIhSF","core-js/modules/esnext.math.degrees.js":"1e8Ri","core-js/modules/esnext.math.fscale.js":"5Y31R","core-js/modules/esnext.math.iaddh.js":"57lww","core-js/modules/esnext.math.imulh.js":"d2fr9","core-js/modules/esnext.math.isubh.js":"57oBp","core-js/modules/esnext.math.rad-per-deg.js":"3dM5T","core-js/modules/esnext.math.radians.js":"foEKl","core-js/modules/esnext.math.scale.js":"iXpEb","core-js/modules/esnext.math.seeded-prng.js":"dp9ts","core-js/modules/esnext.math.signbit.js":"2rwj5","core-js/modules/esnext.math.umulh.js":"fy8Bl","core-js/modules/esnext.number.from-string.js":"6w8r6","core-js/modules/esnext.observable.js":"6yFTU","core-js/modules/esnext.promise.try.js":"kQOdw","core-js/modules/esnext.reflect.define-metadata.js":"lBsjI","core-js/modules/esnext.reflect.delete-metadata.js":"idSZa","core-js/modules/esnext.reflect.get-metadata.js":"dQvP0","core-js/modules/esnext.reflect.get-metadata-keys.js":"4UfAw","core-js/modules/esnext.reflect.get-own-metadata.js":"8BKE4","core-js/modules/esnext.reflect.get-own-metadata-keys.js":"lqSwZ","core-js/modules/esnext.reflect.has-metadata.js":"67E18","core-js/modules/esnext.reflect.has-own-metadata.js":"b7qbH","core-js/modules/esnext.reflect.metadata.js":"ktR6v","core-js/modules/esnext.set.add-all.js":"7c36X","core-js/modules/esnext.set.delete-all.js":"lHdKi","core-js/modules/esnext.set.difference.js":"dP1AE","core-js/modules/esnext.set.every.js":"4tV4O","core-js/modules/esnext.set.filter.js":"hlpTz","core-js/modules/esnext.set.find.js":"aiiEV","core-js/modules/esnext.set.from.js":"2k7Jy","core-js/modules/esnext.set.intersection.js":"ijIjZ","core-js/modules/esnext.set.is-disjoint-from.js":"g1iZh","core-js/modules/esnext.set.is-subset-of.js":"fdw7E","core-js/modules/esnext.set.is-superset-of.js":"6R5mc","core-js/modules/esnext.set.join.js":"54bgm","core-js/modules/esnext.set.map.js":"i0nak","core-js/modules/esnext.set.of.js":"5RZfl","core-js/modules/esnext.set.reduce.js":"7kIwX","core-js/modules/esnext.set.some.js":"cRvBY","core-js/modules/esnext.set.symmetric-difference.js":"1RJII","core-js/modules/esnext.set.union.js":"ghwDx","core-js/modules/esnext.string.at.js":"ewff9","core-js/modules/esnext.string.code-points.js":"jA1PA","core-js/modules/esnext.symbol.dispose.js":"cZD4y","core-js/modules/esnext.symbol.observable.js":"3I5TV","core-js/modules/esnext.symbol.pattern-match.js":"2AEY2","core-js/modules/esnext.weak-map.delete-all.js":"4Z5pz","core-js/modules/esnext.weak-map.from.js":"bQVbE","core-js/modules/esnext.weak-map.of.js":"fanFv","core-js/modules/esnext.weak-set.add-all.js":"2scYe","core-js/modules/esnext.weak-set.delete-all.js":"iiNtz","core-js/modules/esnext.weak-set.from.js":"8fn81","core-js/modules/esnext.weak-set.of.js":"9aBZU","core-js/modules/web.immediate.js":"3pRoj","regenerator-runtime/runtime":"cDAES","./login":"aUJqG","./mapbox":"boTQ2","./logout":"8o2Xz","./singup":"k1hsN","./updateSettings":"j7xLx","./stripe":"boZ94"}],"azdjA":[function(require,module,exports) {
 "use strict";
 var global = require("c6bf5eee641c0bcc");
 var DESCRIPTORS = require("32574bd865b8e6e5");
@@ -11591,6 +11597,7 @@ const logout = async ()=>{
             (0, _alert.showAlert)("success", "Successfully logged out.");
         }
     } catch (error) {
+        console.log(error);
         (0, _alert.showAlert)("error", "Error logging out. Try again.");
     }
 };
@@ -11638,6 +11645,150 @@ const updateSettings = async (data, type)=>{
     }
 };
 
-},{"axios":"5vw73","./alert":"8F2M5","@parcel/transformer-js/src/esmodule-helpers.js":"fofuL"}]},["c1Pvg","fSlqf"], "fSlqf", "parcelRequire900c")
+},{"axios":"5vw73","./alert":"8F2M5","@parcel/transformer-js/src/esmodule-helpers.js":"fofuL"}],"boZ94":[function(require,module,exports) {
+/*eslint-disable*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bookTour", ()=>bookTour);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _stripeJs = require("@stripe/stripe-js");
+var _alert = require("./alert");
+const bookTour = async (tourId)=>{
+    const stripe = await (0, _stripeJs.loadStripe)("pk_test_51Oa0qrClLOpBssJorasvC3xlycbG9WZHraharDSReQ41S2nO9ErxMaAvuw5V3ggobyYhlzn5TzTuRHxMdCS4GoYG00cPh6M27T");
+    try {
+        // 1) Get checkout session from API
+        const session = await (0, _axiosDefault.default).get(`/api/v1/bookings/checkout-session/${tourId}`);
+        // 2) Create checkout form + charge credit card
+        await stripe.redirectToCheckout({
+            sessionId: session.data.session.id
+        });
+    } catch (error) {
+        console.log(error);
+        (0, _alert.showAlert)("error", error);
+    }
+};
+
+},{"axios":"5vw73","@stripe/stripe-js":"dYhEk","./alert":"8F2M5","@parcel/transformer-js/src/esmodule-helpers.js":"fofuL"}],"dYhEk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadStripe", ()=>loadStripe);
+var V3_URL = "https://js.stripe.com/v3";
+var V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
+var EXISTING_SCRIPT_MESSAGE = "loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used";
+var findScript = function findScript() {
+    var scripts = document.querySelectorAll('script[src^="'.concat(V3_URL, '"]'));
+    for(var i = 0; i < scripts.length; i++){
+        var script = scripts[i];
+        if (!V3_URL_REGEX.test(script.src)) continue;
+        return script;
+    }
+    return null;
+};
+var injectScript = function injectScript(params) {
+    var queryString = params && !params.advancedFraudSignals ? "?advancedFraudSignals=false" : "";
+    var script = document.createElement("script");
+    script.src = "".concat(V3_URL).concat(queryString);
+    var headOrBody = document.head || document.body;
+    if (!headOrBody) throw new Error("Expected document.body not to be null. Stripe.js requires a <body> element.");
+    headOrBody.appendChild(script);
+    return script;
+};
+var registerWrapper = function registerWrapper(stripe, startTime) {
+    if (!stripe || !stripe._registerWrapper) return;
+    stripe._registerWrapper({
+        name: "stripe-js",
+        version: "2.3.0",
+        startTime: startTime
+    });
+};
+var stripePromise = null;
+var onErrorListener = null;
+var onLoadListener = null;
+var onError = function onError(reject) {
+    return function() {
+        reject(new Error("Failed to load Stripe.js"));
+    };
+};
+var onLoad = function onLoad(resolve, reject) {
+    return function() {
+        if (window.Stripe) resolve(window.Stripe);
+        else reject(new Error("Stripe.js not available"));
+    };
+};
+var loadScript = function loadScript(params) {
+    // Ensure that we only attempt to load Stripe.js at most once
+    if (stripePromise !== null) return stripePromise;
+    stripePromise = new Promise(function(resolve, reject) {
+        if (typeof window === "undefined" || typeof document === "undefined") {
+            // Resolve to null when imported server side. This makes the module
+            // safe to import in an isomorphic code base.
+            resolve(null);
+            return;
+        }
+        if (window.Stripe && params) console.warn(EXISTING_SCRIPT_MESSAGE);
+        if (window.Stripe) {
+            resolve(window.Stripe);
+            return;
+        }
+        try {
+            var script = findScript();
+            if (script && params) console.warn(EXISTING_SCRIPT_MESSAGE);
+            else if (!script) script = injectScript(params);
+            else if (script && onLoadListener !== null && onErrorListener !== null) {
+                var _script$parentNode;
+                // remove event listeners
+                script.removeEventListener("load", onLoadListener);
+                script.removeEventListener("error", onErrorListener); // if script exists, but we are reloading due to an error,
+                // reload script to trigger 'load' event
+                (_script$parentNode = script.parentNode) === null || _script$parentNode === void 0 || _script$parentNode.removeChild(script);
+                script = injectScript(params);
+            }
+            onLoadListener = onLoad(resolve, reject);
+            onErrorListener = onError(reject);
+            script.addEventListener("load", onLoadListener);
+            script.addEventListener("error", onErrorListener);
+        } catch (error) {
+            reject(error);
+            return;
+        }
+    }); // Resets stripePromise on error
+    return stripePromise["catch"](function(error) {
+        stripePromise = null;
+        return Promise.reject(error);
+    });
+};
+var initStripe = function initStripe(maybeStripe, args, startTime) {
+    if (maybeStripe === null) return null;
+    var stripe = maybeStripe.apply(undefined, args);
+    registerWrapper(stripe, startTime);
+    return stripe;
+}; // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+var stripePromise$1;
+var loadCalled = false;
+var getStripePromise = function getStripePromise() {
+    if (stripePromise$1) return stripePromise$1;
+    stripePromise$1 = loadScript(null)["catch"](function(error) {
+        // clear cache on error
+        stripePromise$1 = null;
+        return Promise.reject(error);
+    });
+    return stripePromise$1;
+}; // Execute our own script injection after a tick to give users time to do their
+// own script injection.
+Promise.resolve().then(function() {
+    return getStripePromise();
+})["catch"](function(error) {
+    if (!loadCalled) console.warn(error);
+});
+var loadStripe = function loadStripe() {
+    for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
+    loadCalled = true;
+    var startTime = Date.now(); // if previous attempts are unsuccessful, will re-load script
+    return getStripePromise().then(function(maybeStripe) {
+        return initStripe(maybeStripe, args, startTime);
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"fofuL"}]},["c1Pvg","fSlqf"], "fSlqf", "parcelRequire900c")
 
 //# sourceMappingURL=index.js.map
