@@ -16,6 +16,7 @@ const formUserData = document.querySelector('.form-user-data');
 const formUserPassword = document.querySelector('.form-user-password');
 const signupForm = document.querySelector('.signup-form');
 const bookBtn = document.getElementById('book-tour');
+const backBtn = document.querySelector('.btn-back');
 
 // DELEGATION
 if (mapBox) {
@@ -77,4 +78,9 @@ if (bookBtn)
   bookBtn.addEventListener('click', (e) => {
     const { tourId } = e.target.dataset;
     bookTour(tourId);
+  });
+
+if (backBtn)
+  backBtn.addEventListener('click', () => {
+    history.back();
   });

@@ -16,7 +16,9 @@ mixin overviewBox(label, text, icon)
         span.overview-box__text=text
 
 block content 
+    
     section.section-header
+        button.btn-back &larr; Go back
         .header__hero
             .header__hero-overlay &nbsp;
             img.header__hero-img(src=`/img/tours/${tour.imageCover}`, alt=`${tour.name}`)
