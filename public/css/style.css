@@ -185,7 +185,7 @@ body {
 .btn-back {
   background-color: #2e864b;
   color: white;
-  margin: 0.4rem;
+  margin: 0.8rem;
   font-size: 1.6rem;
   padding: 1.4rem 3rem;
   border-radius: 0.2rem;
@@ -194,6 +194,13 @@ body {
   text-transform: uppercase;
   border: none;
   cursor: pointer;
+}
+
+.btn-back:hover {
+  transition: all 0.3s;
+  scale: 1.05;
+  opacity: 0.9;
+  font-weight: 400;
 }
 
 .btn,
