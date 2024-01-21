@@ -1353,7 +1353,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   margin: 1rem;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .review__card {
