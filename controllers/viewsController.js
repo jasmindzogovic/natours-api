@@ -89,8 +89,6 @@ exports.bookings = catchAsync(async (req, res, next) => {
 exports.reviews = catchAsync(async (req, res, next) => {
   const userReviews = await Review.find({ user: req.user.id });
 
-  console.log(userReviews);
-
   res.status(200).render('reviews', {
     title: 'My Reviews',
     userReviews,
