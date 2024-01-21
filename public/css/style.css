@@ -318,6 +318,10 @@ body {
   outline-offset: 3px;
 }
 
+#book-tour {
+  margin-left: 5rem;
+}
+
 .header {
   background-color: #444;
   padding: 0 5rem;
