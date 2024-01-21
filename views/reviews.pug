@@ -1,0 +1,14 @@
+extends base
+
+block content
+    .review__container
+        each review in userReviews
+            .review__card
+                p.review__card--comment=review.review
+                p.review__card--rating=review.rating 
+                p.review__card--created-at=review.createdAt.toLocaleString()
+                if review.tour 
+                    p.review__card--name=review.tour.name 
+                else 
+                    p No tour name
+        
