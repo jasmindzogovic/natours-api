@@ -107,6 +107,7 @@ const tourSchema = new mongoose.Schema(
       },
     ],
     guides: [{ type: ObjectId, ref: 'User' }],
+    likes: Number,
   },
   {
     toJSON: {
