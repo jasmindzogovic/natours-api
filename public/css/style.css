@@ -1394,20 +1394,3 @@ body {
 .review__card--created-at {
   font-size: 1.3rem;
 }
-
-.heading__likes {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-right: 2rem;
-}
-
-.heading__likes--btn {
-  padding: 1rem 2rem;
-  background-color: #31894e;
-  border-radius: 3px;
-  border: 0px;
-  color: white;
-  font-weight: 700;
-  font-size: 1.5rem;
-  cursor: pointer;
-}

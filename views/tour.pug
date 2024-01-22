@@ -36,12 +36,6 @@ block content
                     svg.heading-box__icon
                         use(xlink:href='/img/icons.svg#icon-map-pin')
                     span.heading-box__text=tour.startLocation.description
-                if tour.likes 
-                    span.heading__likes=`${tour.likes} likes`
-                    button.heading__likes--btn Like
-                else 
-                    span.heading__likes 0 likes
-                    button.heading__likes--btn Like
 
     section.section-description
         .overview-box
