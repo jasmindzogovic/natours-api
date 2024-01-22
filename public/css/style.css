@@ -1397,7 +1397,7 @@ body {
 
 .heading__likes {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-right: 2rem;
 }
 
@@ -1408,5 +1408,6 @@ body {
   border: 0px;
   color: white;
   font-weight: 700;
+  font-size: 1.5rem;
   cursor: pointer;
 }

@@ -20,7 +20,7 @@ const { createBookingCheckout } = require('../controllers/bookingController');
 
 router.get('/signup', signup);
 router.get('/', createBookingCheckout, isLoggedIn, getOverview);
-router.get('/tour/:slug', isLoggedIn, getTour);
+router.route('/tour/:slug').get(isLoggedIn, getTour);
 router.get('/login', isLoggedIn, login);
 router.get('/me', protect, getAccount);
 router.get('/my-tours', protect, bookings);
