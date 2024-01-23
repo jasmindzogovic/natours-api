@@ -9,12 +9,15 @@ const {
   signup,
   bookings,
   reviews,
+  alerts,
 } = require('../controllers/viewsController');
 
 const {
   isLoggedIn,
   protect,
 } = require('../controllers/authenticationController');
+
+router.use(alerts);
 
 router.get('/signup', signup);
 router.get('/', isLoggedIn, getOverview);

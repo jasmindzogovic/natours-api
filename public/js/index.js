@@ -7,6 +7,7 @@ import { logout } from './logout';
 import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alert';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -17,6 +18,7 @@ const formUserPassword = document.querySelector('.form-user-password');
 const signupForm = document.querySelector('.signup-form');
 const bookBtn = document.getElementById('book-tour');
 const backBtn = document.querySelector('.btn-back');
+const alertDataset = document.body.dataset.alert;
 
 // DELEGATION
 if (mapBox) {
@@ -84,3 +86,5 @@ if (backBtn)
   backBtn.addEventListener('click', () => {
     history.back();
   });
+
+if (alertDataset) showAlert('success', alertDataset);
