@@ -16,10 +16,8 @@ const {
   protect,
 } = require('../controllers/authenticationController');
 
-const { createBookingCheckout } = require('../controllers/bookingController');
-
 router.get('/signup', signup);
-router.get('/', createBookingCheckout, isLoggedIn, getOverview);
+router.get('/', isLoggedIn, getOverview);
 router.route('/tour/:slug').get(isLoggedIn, getTour);
 router.get('/login', isLoggedIn, login);
 router.get('/me', protect, getAccount);
