@@ -18,7 +18,7 @@ const formUserPassword = document.querySelector('.form-user-password');
 const signupForm = document.querySelector('.signup-form');
 const bookBtn = document.getElementById('book-tour');
 const backBtn = document.querySelector('.btn-back');
-const alertDataset = document.body.dataset.alert;
+const alertDataset = document.querySelector('body').dataset.alert;
 
 // DELEGATION
 if (mapBox) {
