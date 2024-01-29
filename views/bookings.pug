@@ -1,0 +1,10 @@
+extends base
+
+block content
+    .card__container
+        each booking in bookings
+            .card--booking
+                h1.card__heading--tour-name Tour Name: #{booking.tour.name}
+                h3.card__heading--user-name User Name: #{booking.user.name}
+                h3.card__heading--user-email Email: #{booking.user.email}
+                h3.card__heading--price Price: $ #{booking.price} 

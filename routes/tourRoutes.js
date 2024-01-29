@@ -15,6 +15,8 @@ const {
   getDistances,
   uploadTourImages,
   resizeTourImages,
+  increaseLikes,
+  getTourBookings,
 } = require('../controllers/tourController');
 
 const {
@@ -36,6 +38,8 @@ router
   .get(getToursWithin);
 
 router.route('/distances/:latlng/unit/:unit').get(getDistances);
+
+router.patch('/like-tour', increaseLikes);
 
 router
   .route('/')

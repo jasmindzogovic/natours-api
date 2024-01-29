@@ -87,6 +87,26 @@ exports.updateTour = updateOne(Tour);
 // DELETE tour
 exports.deleteTour = deleteOne(Tour);
 
+// INCREASE LIKES
+exports.increaseLikes = catchAsync(async (req, res, next) => {
+  const likes = await Tour.findOneAndUpdate(
+    { slug: req.body.data },
+    { $inc: { likes: 1 } },
+    { new: true },
+  );
+
+  if (!likes) {
+    return next(new AppError('The tour did not get a like', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      likes,
+    },
+  });
+});
+
 // AGGREGATION PIPELINE
 exports.getTourStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([

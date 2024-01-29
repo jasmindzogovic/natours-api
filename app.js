@@ -19,21 +19,12 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 
-const { webhookCheckout } = require('./controllers/bookingController');
-
 const app = express();
-
-app.enable('trust proxy');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // 1) MIDDLEWARES
-
-// IMPLEMENT CORS
-app.use(cors());
-
-app.options('*', cors());
 
 // SERVING STATIC FILES
 app.use(express.static(path.join(__dirname, 'public')));
@@ -100,13 +91,6 @@ const limiter = rateLimit({
 });
 
 app.use('/', limiter);
-
-// STRIPE WEBHOOK
-app.post(
-  '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
-  webhookCheckout,
-);
 
 // BODY PARSER
 app.use(express.json({ limit: '10kb' }));

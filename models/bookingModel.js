@@ -12,6 +12,7 @@ const bookingSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'User',
     required: [true, 'Booking must belong to a user.'],
+    unique: true,
   },
   price: {
     type: Number,

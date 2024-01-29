@@ -15,4 +15,18 @@ block content
                 p.review__card--comment=review.review
                 p.review__card--rating Rating #{review.rating} 
                 p.review__card--created-at=review.createdAt.toLocaleString()
-        
+                input(type="hidden" value=`${review.id}`)
+                button.btn.btn--green.btn--edit Edit
+    .review-edit-form.hide-edit-form
+            h2.heading-secondary.ma-bt-lg Edit your review
+            form.form.form--edit
+                .form__group
+                    label.form__label(for='review') Review
+                    input#review.form__input(type='review', value='' required)
+                .form__group.ma-bt-md
+                    label.form__label(for='rating') Rating
+                    input#rating.form__input(type='rating', value='' required,   min=1 max=5)
+                .form__group
+                    input.review--id(type='hidden' value='')
+                .form__group
+                    button.btn.btn--green.btn--edit-review Edit Review

@@ -18,6 +18,8 @@ const cookieOptions = {
   httpOnly: true,
 };
 
+if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRATION_TIME,

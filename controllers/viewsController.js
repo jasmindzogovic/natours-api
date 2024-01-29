@@ -6,14 +6,6 @@ const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
-exports.alerts = (req, res, next) => {
-  const { alert } = req.query;
-  if (alert === 'booking')
-    res.locals.alert =
-      'Your booking was successful. Please check your email for confirmation!';
-  next();
-};
-
 exports.getOverview = catchAsync(async (req, res, next) => {
   const tours = await Tour.find();
 
@@ -31,6 +23,13 @@ exports.getTour = catchAsync(async (req, res, next) => {
     fields: 'review rating user',
   });
 
+  const bookings = await Booking.find({ tour: tour._id });
+
+  const booked = await Booking.find({
+    tour: tour._id,
+    user: res.locals.user.id,
+  });
+
   if (!tour) {
     return next(new AppError('There is no tour with that name.', 404));
   }
@@ -38,6 +37,21 @@ exports.getTour = catchAsync(async (req, res, next) => {
   res.status(200).render('tour', {
     title: `${tour.name}`,
     tour,
+    bookings,
+    booked,
+  });
+});
+
+exports.getTourBookings = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const tour = await Tour.findOne({ _id: id });
+
+  const bookings = await Booking.find({ tour: tour._id });
+
+  res.status(200).render('bookings', {
+    title: `${tour.name}`,
+    bookings,
   });
 });
 

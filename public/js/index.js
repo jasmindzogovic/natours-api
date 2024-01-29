@@ -7,7 +7,9 @@ import { logout } from './logout';
 import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
-import { showAlert } from './alert';
+import { likeTour } from './likeTour';
+import { leaveReview } from './leaveReview';
+import { editReviewFunc } from './editReview';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -18,7 +20,10 @@ const formUserPassword = document.querySelector('.form-user-password');
 const signupForm = document.querySelector('.signup-form');
 const bookBtn = document.getElementById('book-tour');
 const backBtn = document.querySelector('.btn-back');
-const alertDataset = document.querySelector('body').dataset.alert;
+const likeBtn = document.querySelector('.btn-like');
+const reviewForm = document.querySelector('.form--review');
+const editBtn = document.querySelectorAll('.btn--edit');
+const editForm = document.querySelector('.form--edit');
 
 // DELEGATION
 if (mapBox) {
@@ -87,4 +92,57 @@ if (backBtn)
     history.back();
   });
 
-if (alertDataset) showAlert('success', alertDataset);
+if (likeBtn)
+  likeBtn.addEventListener('click', () => {
+    const slug = window.location.pathname.split('/').at(2);
+    likeTour(slug);
+  });
+
+if (reviewForm)
+  reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const review = document.getElementById('review').value;
+    const rating = document.getElementById('rating').value;
+    const tourId = document.getElementById('tour-id').value;
+
+    leaveReview(review, rating, tourId);
+  });
+
+if (editBtn)
+  editBtn.forEach((edit) =>
+    edit.addEventListener('click', (e) => {
+      const editForm = document.querySelector('.review-edit-form');
+      editForm.classList.toggle('hide-edit-form');
+
+      const review = e.target.parentElement.querySelector(
+        '.review__card--comment',
+      ).textContent;
+
+      const rating = +e.target.parentElement
+        .querySelector('.review__card--rating')
+        .textContent.split(' ')
+        .at(1);
+
+      const reviewId = e.target.previousSibling.value;
+
+      const editReview = document.getElementById('review');
+      const editRating = document.getElementById('rating');
+      const editReviewId = document.querySelector('.review--id');
+
+      editReview.value = review;
+      editRating.value = rating;
+      editReviewId.value = reviewId;
+    }),
+  );
+
+if (editForm)
+  editForm.addEventListener('click', (e) => {
+    e.preventDefault();
+    const editReview = document.getElementById('review').value;
+    const editRating = +document.getElementById('rating').value;
+    const editReviewId = document.querySelector('.review--id').value;
+
+    console.log(editReview, editRating, editReviewId);
+
+    editReviewFunc(editReview, editRating, editReviewId);
+  });
