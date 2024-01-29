@@ -136,7 +136,7 @@ if (editBtn)
   );
 
 if (editForm)
-  editForm.addEventListener('click', (e) => {
+  editForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const editReview = document.getElementById('review').value;
     const editRating = +document.getElementById('rating').value;
