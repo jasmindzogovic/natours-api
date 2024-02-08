@@ -149,4 +149,4 @@ if (editForm)
     editReviewFunc(editReview, editRating, editReviewId);
   });
 
-if (alert) showAlert('success', alertMessage);
+if (alertMessage) showAlert('success', alertMessage);
