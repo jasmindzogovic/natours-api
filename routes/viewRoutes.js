@@ -10,6 +10,7 @@ const {
   bookings,
   reviews,
   getTourBookings,
+  alerts,
 } = require('../controllers/viewsController');
 
 const {
@@ -17,6 +18,8 @@ const {
   protect,
   restrictTo,
 } = require('../controllers/authenticationController');
+
+router.use(alerts);
 
 router.get('/signup', signup);
 router.get('/', isLoggedIn, getOverview);

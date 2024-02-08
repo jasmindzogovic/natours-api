@@ -10,6 +10,7 @@ import { bookTour } from './stripe';
 import { likeTour } from './likeTour';
 import { leaveReview } from './leaveReview';
 import { editReviewFunc } from './editReview';
+import { showAlert } from './alert';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -24,6 +25,7 @@ const likeBtn = document.querySelector('.btn-like');
 const reviewForm = document.querySelector('.form--review');
 const editBtn = document.querySelectorAll('.btn--edit');
 const editForm = document.querySelector('.form--edit');
+const alertMessage = document.querySelector('body').dataset.alert;
 
 // DELEGATION
 if (mapBox) {
@@ -146,3 +148,5 @@ if (editForm)
 
     editReviewFunc(editReview, editRating, editReviewId);
   });
+
+if (alert) showAlert('success', alertMessage);
