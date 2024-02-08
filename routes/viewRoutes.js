@@ -18,10 +18,8 @@ const {
   restrictTo,
 } = require('../controllers/authenticationController');
 
-const { createBookingCheckout } = require('../controllers/bookingController');
-
 router.get('/signup', signup);
-router.get('/', createBookingCheckout, isLoggedIn, getOverview);
+router.get('/', isLoggedIn, getOverview);
 router.get('/tour/:slug', isLoggedIn, getTour);
 router.get('/tour/:id/bookings', protect, restrictTo('admin'), getTourBookings);
 router.get('/login', isLoggedIn, login);
