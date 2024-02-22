@@ -6,9 +6,6 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
 
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-process.env.NODE_EXTRA_CA_CERTS = '/cert.pem';
-
 const cookieOptions = {
   expiresIn: new Date(
     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
